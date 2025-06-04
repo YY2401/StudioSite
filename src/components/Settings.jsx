@@ -1,15 +1,45 @@
 import React,{use, useState} from "react";
+import MenuSetting from "./MenuSetting";
 
-export default function Settings({setBackgroundImage,setThemeColor}) {
+
+export default function Settings({
+    setBackgroundImage,
+    setThemeColor,
+    setLogoUrl,
+    setVideoUrl,
+    clearBackground,
+    manuConfig,
+    setMenuConfig
+}) {
   const [showPannel,setShowPannel] = useState(false);
+
+  const [activeTab,setActiveTab] = useState(0);
 
   const handleBackgroundUpload = (e) => {
     const file = e.target.files[0];
     if(file){
         const url = URL.createObjectURL(file);
         setBackgroundImage(url);
+        setVideoUrl(null); 
     }
   };
+
+  const handleLogoUpload =(e) => {
+    const file =e.target.files[0];
+    if(file){
+        const url = URL.createObjectURL(file);
+        setBackgroundImage(url);
+        setVideoUrl(null);
+    }
+  };
+
+  const handleVideoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setLogoUrl(url);
+    }
+  }
 
   const handleColorChange = (e) =>{
     setThemeColor(e.target.value);

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import logo from "../logo.svg";
+import defaultLogo from "../logo.svg";
 
-export default function Navbar({ themeColor }) {
+export default function Navbar({ themeColor,logoUrl,menuConfig }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdownIndex,setOpenDropdownIndex]= useState(null);
+  //紀錄哪一個選項目前點開(使用)
 
+  //判斷文字顏色
   const isColorDark = (hex) => {
+    if(!hex.startsWith("#") || hex.length !== 7)return false;
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
     const b = parseInt(hex.slice(5, 7), 16);
@@ -16,13 +20,90 @@ export default function Navbar({ themeColor }) {
 
   return (
     <nav
-      className="w-full shadow-md"
+      className="w-full shadow-md relative z-20"
       style={{ backgroundColor: themeColor }}
     >
       <div className="max-w-full px-4 sm:px-6 lg:px-8">
         {/* 主區塊:左右兩邊自行撐滿 */}
         <div className="flex items-center justify-between h-16">
           {/* 左側:LOGO + 品牌名稱 */}
+          <div className="flex items-center space-x-2">
+            <image 
+              src={logoUrl || defaultLogo}
+              alt="Logo"
+              className="h-8 w-8 auto">
+            </image>
+            <span className={`${textColorClass}font-sembold text-xl`}>
+              Studio
+            </span>
+          </div>
+
+          {/* 大螢幕主選單 */}
+          <div className="hidden md:flex md:items-center md:space-x-6">
+            {menuConfig.map((item,idx) => {
+              // 主選單若有選項，做下拉選單
+              const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+              return(
+                <div
+                  key={idx}
+                  className="relative"
+                  onMouseEnter={() => hasChildren && setOpenDropdownIndex(idx)}
+                  onMouseLeave={() => hasChildren && setOpenDropdownIndex(null)}
+                  >
+
+                  {/* 主選單文字 */}
+                  <a
+                    herf={item.url}
+                    className={`${textColorClass} hover:opacity-75 px-3 py-2 rounded-md text-sm font-medium`}
+                    onClick={(e) => {
+                      if (hasChildren) {
+                        e.preventDefault(); // 阻止連結跳轉
+                        setOpenDropdownIndex(openDropdownIndex === idx ? null : idx);
+                      }
+                    }}
+                    >
+
+                    {item.label}
+                    {hasChildren && (
+                      <svg
+                        className={`ml-1 h-4 w-4 transition-transform ${
+                          openDropdownIndex === idx ? "transform rotate-180" : ""}`}x
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7">
+                      </path>
+                      </svg>
+                    )}
+                  </a>
+
+                  {/* 子選單:滑鼠滑入或點選後顯示 */}
+                  {hasChildren && openDropdownIndex === idx && (
+                    <div
+                      className="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg overflow-hidden z-10"
+                      style={{ backgroundColor: themeColor }}>
+                      {item.children.map(sub,sidx)(
+                        <a
+                          key={sidx}
+                          href={sub.url}
+                          className="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm"
+                          >
+                          
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                </div>
+              )
+            })}
+          </div>
+
           <button
             onClick={() => window.location.href = "#"} 
             className=
@@ -30,7 +111,7 @@ export default function Navbar({ themeColor }) {
             style={{ backgroundColor: themeColor }}
             >
             <img
-              src={logo}
+              src={defaultLogo}
               alt="Logo"
               className="h-8 w-8"
             />

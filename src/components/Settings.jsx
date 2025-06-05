@@ -8,7 +8,7 @@ export default function Settings({
     setLogoUrl,
     setVideoUrl,
     clearBackground,
-    manuConfig,
+    menuConfig,
     setMenuConfig
 }) {
   const [showPannel,setShowPannel] = useState(false);
@@ -24,16 +24,16 @@ export default function Settings({
     }
   };
 
-  const handleLogoUpload =(e) => {
+  const handleVideoUpload =(e) => {
     const file =e.target.files[0];
     if(file){
         const url = URL.createObjectURL(file);
-        setBackgroundImage(url);
         setVideoUrl(null);
+        setBackgroundImage(url);
     }
   };
 
-  const handleVideoUpload = (e) => {
+  const handleLogoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file);
@@ -69,45 +69,101 @@ export default function Settings({
 
             {/* 設定面板 */}
             {showPannel && (
-                <div className="mt-2 p-4 bg-white rounded-lg shadow-lg w-64">
-                    <h2 className="text-lg font-medium text-gray-800 mb-2">
-                        外觀設定
-                        </h2>
-
-                    {/* 上傳背景 */}
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            上傳背景圖片
-                            </label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleBackgroundUpload}
-                            className="block w-full"
-                        />
+                <div className="mt-2 p-4 bg-white rounded-lg w-80 max-h-[80vh] overflow-y-auto shadow-lg">
+                    {/* Tab標籤 */}
+                    <div className="flex border-b mb-4">
+                        <button
+                            onClick={() => setActiveTab(0)}
+                            className={`flex-1 text-center py-2
+                                 ${activeTab === 0 ? 'border-b-2 border-blue-500 text-blue-600' : 
+                                 'text-gray-600 hover:text-blue-600'}`}
+                    >外觀設定
+                    </button>
+                    <button
+                        onClick={() => setActiveTab(1)}
+                        className={`flex-1 text-center py-2
+                                 ${activeTab === 1 ? 'border-b-2 border-blue-500 text-gray-600' : 
+                                 'text-gray-600 hover:text-gray-600'}`}
+                    >導航設定
+                    </button>
                     </div>
 
-                    {/* 選擇主題色 */}
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            選擇主題色
+                    {/* 外觀設定 */}
+                    {activeTab === 0 && (
+                      <>
+                      <div className="mb-4">
+                        <label className="block text-gray-700 mb-1">
+                          上傳背景圖片
                         </label>
                         <input
-                            type="color"
-                            onChange={handleColorChange}
-                            className="block w-full p-1 border border-gray-300 rounded"
+                          type="file"
+                          accept="image/*"
+                          onchange={handleBackgroundUpload}
+                          className="w-full"
                         />
-                    </div>
-
-                    {/* 清除背景按鈕 */}
-                    <div>
                         <button
-                            onClick={() => setBackgroundImage(null)}
-                            className="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+                          onClick={()=>clearBackground()}
+                          className="mt-2 text-sm text-red-600 hover:underline"
                         >
-                            清除背景
+                          清除背景
                         </button>
-                    </div>
+                      </div>
+
+                      {/* 上傳背景影片 */}
+                      <div className="mb-4">
+                        <label className="block text-gray-700 mb-1">
+                          上傳背景影片
+                        </label>
+                        <input
+                          type="file"
+                          accept="video/*"
+                          onchange={handleVideoUpload}
+                          className="w-full"
+                        />
+                        <button
+                          onClick={()=>setVideoUrl(null)}
+                          className="mt-2 text-sm text-red-600 hover:underline">
+                          清除影片背景
+                        </button>
+                      </div>
+
+                      {/* 上傳Logo */}
+                      <div className="mb-4">
+                        <label className="block text-gray-700 mb-1">
+                          上傳 LOGO
+                        </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onchange={handleLogoUpload}
+                          className="w-full"
+                        />
+                        <button
+                          onClick={()=>setLogoUrl(null)}
+                          className="mt-2 text-sm text-red-600 hover:underline">
+                          還原預設LOGO
+                        </button>
+                      </div>
+
+                      {/* 選擇主題色 */}
+                      <div className="mb-4">
+                        <label className="block text-gray-700 mb-1">
+                          選擇主題色
+                        </label>
+                        <input
+                          type="color"
+                          onchange={handleColorChange}
+                          classNam="w-12 h-12 p-0 border-none"
+                        />
+                      </div>
+                      </>
+                    )}
+                    {/* 導航設定 */}
+                    {activeTab === 1 && (
+                        <MenuSetting
+                            menuConfig={menuConfig}
+                            setMenuConfig={setMenuConfig} />
+                    )}
                 </div>
             )}
     </div>

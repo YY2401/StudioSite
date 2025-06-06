@@ -98,7 +98,7 @@ export default function Settings({
                         <input
                           type="file"
                           accept="image/*"
-                          onchange={handleBackgroundUpload}
+                          onChange={handleBackgroundUpload}
                           className="w-full"
                         />
                         <button
@@ -117,7 +117,7 @@ export default function Settings({
                         <input
                           type="file"
                           accept="video/*"
-                          onchange={handleVideoUpload}
+                          onChange={handleVideoUpload}
                           className="w-full"
                         />
                         <button
@@ -135,7 +135,7 @@ export default function Settings({
                         <input
                           type="file"
                           accept="image/*"
-                          onchange={handleLogoUpload}
+                          onChange={handleLogoUpload}
                           className="w-full"
                         />
                         <button
@@ -152,8 +152,8 @@ export default function Settings({
                         </label>
                         <input
                           type="color"
-                          onchange={handleColorChange}
-                          classNam="w-12 h-12 p-0 border-none"
+                          onChange={handleColorChange}
+                          className="w-12 h-12 p-0 border-none"
                         />
                       </div>
                       </>

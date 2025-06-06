@@ -77,7 +77,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
 
     return(
         <div>
-            <h2 classname="text-lg font-medium text-gray-800 mb-2">
+            <h2 className="text-lg font-medium text-gray-800 mb-2">
                 選單設定
             </h2>
 
@@ -117,7 +117,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
                             <input
                                 type="text"
                                 value={item.url}
-                                onchange={(e) => updateMainItem(idx,"url", e.target.value)}
+                                onChange={(e) => updateMainItem(idx,"url", e.target.value)}
                                 className="w-full border rounded px-2 py-1"
                             />
                         </div>
@@ -180,7 +180,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
                 {/* 儲存按鈕 */}
                 <div>
                     <button
-                        onclock={handleSave}
+                        onClick={handleSave}
                         className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                     >
                         儲存選單設定

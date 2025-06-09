@@ -1,11 +1,25 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import defaultLogo from "../logo.svg"; // 預設 Logo
 
 export default function Navbar({ themeColor, logoUrl, menuConfig }) {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
-  // openDropdownIndex 用來記錄「哪個主選單被點開了，顯示子選單？」
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function habndleClickOutside(event){
+      if(
+        menuRef.current && !menuRef.current.contains(event.target)
+      ){
+        setOpenDropdownIndex(null);
+      }
+    }
+    document.addEventListener("mousedown",habndleClickOutside);
+    return() =>{
+      document.removeEventListener("mousedown",habndleClickOutside);
+    }
+  },[]);
 
   // 判斷文字顏色（深色背景要白字）
   const isColorDark = (hex) => {
@@ -23,7 +37,7 @@ export default function Navbar({ themeColor, logoUrl, menuConfig }) {
       className="w-full shadow-md relative z-20"
       style={{ backgroundColor: themeColor }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={menuRef}>
         <div className="flex items-center justify-between h-16">
           {/* 左側：Logo + 品牌 */}
           <div className="flex items-center space-x-2">
@@ -46,15 +60,15 @@ export default function Navbar({ themeColor, logoUrl, menuConfig }) {
                 <div
                   key={idx}
                   className="relative"
-                  onMouseEnter={() => hasChildren && setOpenDropdownIndex(idx)}
-                  onMouseLeave={() => hasChildren && setOpenDropdownIndex(null)}
+                  //待解決:MouseLeave與MouseEnter會打架相互影響觸發
+                  // onMouseEnter={() => hasChildren && setOpenDropdownIndex(idx)}
+                  // onMouseLeave={() => hasChildren && setOpenDropdownIndex(null)}
                 >
                   {/* 主選單文字 */}
                   <a
                     href={item.url}
                     className={`${textColorClass} hover:opacity-75 px-3 py-2 rounded-md text-sm font-medium flex items-center`}
                     onClick={(e) => {
-                      // 如果有子選單，點擊文字不想直接跳頁，可改為 only toggle dropdown
                       if (hasChildren) {
                         e.preventDefault();
                         setOpenDropdownIndex(openDropdownIndex === idx ? null : idx);
@@ -84,9 +98,9 @@ export default function Navbar({ themeColor, logoUrl, menuConfig }) {
                   {/* 子選單：滑鼠滑入或點擊後顯示 */}
                   {hasChildren && openDropdownIndex === idx && (
                     <div
-                      className="absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg overflow-hidden z-30"
+                      className="absolute left-0 mt-2 w-40 rounded-md shadow-lg z-40"
                       style={{
-                        backgroundColor: "#ffffff",
+                        backgroundColor: textColorClass,
                       }}
                     >
                       {item.children.map((sub, sidx) => (

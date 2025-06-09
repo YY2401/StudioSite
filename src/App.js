@@ -1,14 +1,19 @@
 // src/App.js
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "./components/Navbar";
 import Settings from "./components/Settings";
+import Marquee from "./components/Marquee";
 import "./App.css";
+
+
 
 export default function App() {
   const [backgroundImage, setBackgroundImage] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
   const [themeColor, setThemeColor] = useState("#ffffff");
   const [logoUrl, setLogoUrl] = useState(null);
+
+  
 
   const [menuConfig, setMenuConfig] = useState([
     { label: "首頁", url: "/" },
@@ -24,6 +29,8 @@ export default function App() {
     { label: "商店", url: "/portfolio" },
     { label: "聯絡", url: "/contact" },
   ]);
+
+
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -63,14 +70,15 @@ export default function App() {
           menuConfig={menuConfig}
         />
 
+        <Marquee>
+          
+        </Marquee>
+
         <main className="flex-1 p-4 text-gray-800">
-          <h1 className="text-3xl font-bold mb-4">工作室示範網站</h1>
+          <h1 className="text-3xl font-bold mb-4">SITE</h1>
           <p className="mb-4">
-            這是一個整合「動態 NavBar 設定」以及「背景/LOGO/影片」的範本。
           </p>
           <p className="text-gray-600">
-            透過右下角設定，您可以修改「導航選單」的項目名稱、URL，以及新增「下拉子選單」。  
-            也能上傳新的背景圖片、背景影片、或是自訂 Logo，甚至選擇主題色。
           </p>
         </main>
 

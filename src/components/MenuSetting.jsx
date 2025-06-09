@@ -112,7 +112,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
 
                         <div className="mb-2">
                             <label className="block text-gray-700">
-                                連結 (url):
+                                連結 (url): (斜線後加上英文名稱)
                             </label>
                             <input
                                 type="text"
@@ -139,7 +139,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
                                             子選單 #{sidx + 1}
                                         </span>
                                         <button
-                                            onClick={() => removeMenuItem(idx, sidx)}
+                                            onClick={() => removeSubItem(idx, sidx)}
                                             className="text-red-600 hover:underline text-sm"
                                         >
                                             刪除
@@ -155,7 +155,7 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-600">連結：</label>
+                                        <label className="block text-gray-600">連結：(斜線後加上英文名稱)</label>
                                         <input
                                             type="text"
                                             value={sub.url}

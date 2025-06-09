@@ -13,7 +13,6 @@ export default function App() {
   const [themeColor, setThemeColor] = useState("#ffffff");
   const [logoUrl, setLogoUrl] = useState(null);
 
-  
 
   const [menuConfig, setMenuConfig] = useState([
     { label: "首頁", url: "/" },
@@ -69,7 +68,7 @@ export default function App() {
           logoUrl={logoUrl}
           menuConfig={menuConfig}
         />
-
+        
         <Marquee>
           
         </Marquee>

@@ -73,6 +73,11 @@ export default function App() {
           
         </Marquee>
 
+        <div className="text-center text-5xl font-bold my-8 text-black">
+          簡介
+        </div>
+        
+
         <main className="flex-1 p-4 text-gray-800">
           <h1 className="text-3xl font-bold mb-4">SITE</h1>
           <p className="mb-4">
@@ -96,7 +101,7 @@ export default function App() {
         />
 
         <footer className="bg-gray-800 text-white p-4 text-center">
-          <p>© 2025 工作室示範網站</p>
+          <p>© 2025 測試</p>
         </footer>
       </div>
     </div>

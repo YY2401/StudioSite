@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 function ImageSlider() {
   const [current, setCurrent] = useState(0);
   const [sliding, setSliding] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const images = ["testMov.mp4", "testMov_2.mp4", "testMov_3.mp4"];
   const nextIdx = (current + 1) % images.length;
   const sliderRef = useRef(null);
@@ -43,11 +44,85 @@ function ImageSlider() {
     willChange: "transform",
   });
 
+  // 彈窗內容
+  const renderModal = () => (
+    <div
+      style={{
+        position: "fixed",
+        top: 0, left: 0, right: 0, bottom: 0,
+        background: "rgba(0,0,0,0.7)",
+        zIndex: 1000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+      onClick={() => setModalOpen(false)}
+    >
+      <div
+        style={{
+          width: "70vw",
+          height: "70vh",
+          background: "#222",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "12px",
+          position: "relative"
+        }}
+        onClick={e => e.stopPropagation()} 
+      >
+        {images[current].endsWith(".mp4") ? (
+          <video
+            src={images[current]}
+            controls
+            autoPlay
+            loop
+            muted
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              borderRadius: "12px"
+            }}
+          />
+        ) : (
+          <img
+            src={images[current]}
+            alt={`slide-${current}`}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              borderRadius: "12px"
+            }}
+          />
+        )}
+        {/* 關閉按鈕 */}
+        <button
+          onClick={() => setModalOpen(false)}
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 16,
+            background: "rgba(0,0,0,0.7)",
+            color: "#fff",
+            border: "none",
+            borderRadius: "50%",
+            width: 32,
+            height: 32,
+            fontSize: 20,
+            cursor: "pointer"
+          }}
+        >✕</button>
+      </div>
+    </div>
+  );
+
   return (
     <div
       ref={sliderRef}
       style={{
-        position: "relative",  
+        position: "relative",
         width: "100%",
         overflow: "hidden",
       }}
@@ -82,6 +157,7 @@ function ImageSlider() {
               width: "100%",
               display: "flex",
               justifyContent: "center",
+              alignItems: "center"
             }}
           >
             {images[idx].endsWith(".mp4") ? (
@@ -95,7 +171,9 @@ function ImageSlider() {
                   width: "80%",
                   maxWidth: "1200px",
                   objectFit: "cover",
+                  cursor: idx === current ? "pointer" : "default"
                 }}
+                onClick={idx === current ? () => setModalOpen(true) : undefined}
               />
             ) : (
               <img
@@ -105,7 +183,9 @@ function ImageSlider() {
                   width: "80%",
                   maxWidth: "1200px",
                   objectFit: "cover",
+                  cursor: idx === current ? "pointer" : "default"
                 }}
+                onClick={idx === current ? () => setModalOpen(true) : undefined}
               />
             )}
           </div>
@@ -137,8 +217,8 @@ function ImageSlider() {
       <div
         style={{
           position: "absolute",
-          bottom: "16px",               
-          left: "50%",                  
+          bottom: "16px",
+          left: "50%",
           transform: "translateX(-50%)",
           display: "flex",
           zIndex: 10,
@@ -155,11 +235,12 @@ function ImageSlider() {
               backgroundColor: "#ddd",
               margin: "0 6px",
               cursor: "pointer",
-              opacity:idx === current?"1":".3"
+              opacity: idx === current ? "1" : ".3"
             }}
           />
         ))}
       </div>
+      {modalOpen && renderModal()}
     </div>
   );
 }

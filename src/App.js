@@ -3,6 +3,8 @@ import React, { useRef, useState } from "react";
 import Navbar from "./components/Navbar";
 import Settings from "./components/Settings";
 import Marquee from "./components/Marquee";
+import FeatureSection from "./components/FeatureSection";
+import BlockSetting from "./components/BlockSetting";
 import "./App.css";
 
 
@@ -29,6 +31,12 @@ export default function App() {
     { label: "聯絡", url: "/contact" },
   ]);
 
+  const [blocksConfig,setBlocksConfig] = useState([
+    //樣本舉例
+    // {ImageUrl:'./public/logo192.png',title:'遊戲',description:'提供放置有關遊戲說明的相關文字，測試每行長度與間距如目前顯示結果，長度達標會換行'},
+    // {ImageUrl:'./logo512.png',title:'美術',description:'提供放置有關美術說明的相關文字，測試每行長度與間距如目前顯示結果，長度達標會換行'}
+
+  ])
 
 
   return (
@@ -76,7 +84,14 @@ export default function App() {
         <div className="text-center text-5xl font-bold my-8 text-black">
           簡介
         </div>
-        
+
+        <div className="App">
+          <BlockSetting
+          blocksConfig={blocksConfig}
+          setBlocksConfig={setBlocksConfig}
+          />
+        <FeatureSection blocks={blocksConfig}/>
+        </div>
 
         <main className="flex-1 p-4 text-gray-800">
           <h1 className="text-3xl font-bold mb-4">SITE</h1>

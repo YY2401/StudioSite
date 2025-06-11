@@ -1,6 +1,6 @@
 import React,{use, useState} from "react";
 import MenuSetting from "./MenuSetting";
-
+import BlockSetting from "./BlockSetting";
 
 export default function Settings({
     setBackgroundImage,
@@ -9,7 +9,7 @@ export default function Settings({
     setVideoUrl,
     clearBackground,
     menuConfig,
-    setMenuConfig
+    setMenuConfig,
 }) {
   const [showPannel,setShowPannel] = useState(false);
 

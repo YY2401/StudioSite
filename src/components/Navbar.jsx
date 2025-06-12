@@ -98,10 +98,10 @@ export default function Navbar({ themeColor, logoUrl, menuConfig }) {
                   {/* 子選單：滑鼠滑入或點擊後顯示 */}
                   {hasChildren && openDropdownIndex === idx && (
                     <div
-                      className="absolute left-0 mt-2 w-40 rounded-md shadow-lg z-40"
-                      style={{
-                        backgroundColor: textColorClass,
-                      }}
+                      className="absolute left-0 mt-2 w-40 rounded-md shadow-lg z-90"
+                    style={{
+                      backgroundColor: isColorDark(themeColor) ? "#222" : "#fff"
+                    }}
                     >
                       {item.children.map((sub, sidx) => (
                         <a

@@ -70,15 +70,15 @@ export default function App() {
       ></div>
 
       {/* 內容層 */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-50 flex flex-col min-h-screen">
         <Navbar
           themeColor={themeColor}
           logoUrl={logoUrl}
           menuConfig={menuConfig}
+          className="fixed top-0 left-0 w-full z-999"
         />
         
         <Marquee>
-          
         </Marquee>
 
         <div className="text-center text-5xl font-bold my-8 text-black">

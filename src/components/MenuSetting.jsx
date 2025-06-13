@@ -11,6 +11,11 @@ export default function MenuSetting({menuConfig,setMenuConfig}) {
                 url:"/new-url",
                 children: [],
             },
+            {
+                "label":"聯絡",
+                "url":"/contact",
+                "children":[]
+            }
         ]);
     };
 

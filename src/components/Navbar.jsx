@@ -60,9 +60,6 @@ export default function Navbar({ themeColor, logoUrl, menuConfig }) {
                 <div
                   key={idx}
                   className="relative"
-                  //待解決:MouseLeave與MouseEnter會打架相互影響觸發
-                  // onMouseEnter={() => hasChildren && setOpenDropdownIndex(idx)}
-                  // onMouseLeave={() => hasChildren && setOpenDropdownIndex(null)}
                 >
                   {/* 主選單文字 */}
                   <a

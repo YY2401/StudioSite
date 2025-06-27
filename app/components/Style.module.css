@@ -1,0 +1,13 @@
+@layer components {
+  .labelBtn {
+    @apply py-1 px-4 font-medium hover:bg-zinc-400 cursor-pointer flex items-center space-x-2 rounded-md mx-2;
+  }
+
+  .labelBtnSelected {
+    @apply ring-2 ring-blue-400;
+  }
+
+  .labelImg {
+    @apply w-6 h-6 object-cover rounded-full;
+  }
+}

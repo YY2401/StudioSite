@@ -34,7 +34,7 @@ const menuItem: MenuItem[] = [
       { label: "教學文檔", link: "/platform/docs" },
     ],
   },
-  { label: "商店", link: "/shop" },
+  { label: "商店", link: "/Store" },
   { label: "聯絡", link: "/connect" },
 ];
 

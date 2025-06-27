@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
 import type { SidebarMenuItem } from "./SidebarMenu";
 import Carousel from "./Carousel";
-
+import Footer from "./Footer";
 type IntroItem = {
   id: string;
   title: string;
@@ -81,6 +81,8 @@ const IndexIntro: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </section>
   );
 };

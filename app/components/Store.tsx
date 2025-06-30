@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export type NavItem = { label: string; key: string };
+
+
 const initialItems: NavItem[] = [
   { label: "Home", key: "home" },
   { label: "Category", key: "category" },

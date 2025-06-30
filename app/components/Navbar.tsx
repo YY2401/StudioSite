@@ -7,35 +7,35 @@ type MenuItem = {
 };
 
 const menuItem: MenuItem[] = [
-  { label: "首頁", link: "/" },
-  { label: "最新動態", link: "/news" },
-  { label: "主要服務內容", link: "/services" },
+  { label: "首頁", link: "" },
+  { label: "最新動態", link: "" },
+  { label: "主要服務內容", link: "" },
   {
     label: "遊戲",
     link: "/games",
     subMenu: [
-      { label: "遊戲列表", link: "/games/list" },
-      { label: "最新活動", link: "/games/events" },
+      { label: "遊戲列表", link: "" },
+      { label: "最新活動", link: "" },
     ],
   },
   {
     label: "美術",
     link: "/art",
     subMenu: [
-      { label: "插畫", link: "/games/paint" },
-      { label: "動畫", link: "/games/movies" },
+      { label: "插畫", link: "" },
+      { label: "動畫", link: "" },
     ],
   },
   {
     label: "平台",
     link: "/platform",
     subMenu: [
-      { label: "下載中心", link: "/platform/downloads" },
-      { label: "教學文檔", link: "/platform/docs" },
+      { label: "下載中心", link: "" },
+      { label: "教學文檔", link: "" },
     ],
   },
   { label: "商店", link: "/Store" },
-  { label: "聯絡", link: "/connect" },
+  { label: "聯絡", link: "" },
 ];
 
 const NavBar: React.FC = () => (

@@ -1,6 +1,15 @@
 import React, { useState } from "react";
+import Carousel from "./Carousel";
 
 export type NavItem = { label: string; key: string };
+
+const carouselSources = [
+  "/ProductSample_1.jpg",
+  "/ProductSample_2.jpg",
+  "/ProductSample_3.jpg",
+  "/ProductSample_4.jpg",
+  "CarouselTest_1.mp4",
+];
 
 type Product = {
   id: number;
@@ -18,13 +27,13 @@ type Category = {
 
 const initialCategories: Category[] = [
   {
-    key: "home",
-    label: "Home",
+    key: "Type1",
+    label: "Type1",
     products: [],
   },
   {
-    key: "category",
-    label: "Category",
+    key: "Type2",
+    label: "Type2",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index + 1,
       name: `Product ${index + 1}`,
@@ -34,13 +43,13 @@ const initialCategories: Category[] = [
     })),
   },
   {
-    key: "inner",
-    label: "Inner",
+    key: "Type3",
+    label: "Type3",
     products: [],
   },
   {
-    key: "testimonials",
-    label: "Testimonials",
+    key: "Type4",
+    label: "Type4",
     products: [],
   },
 ];
@@ -50,8 +59,57 @@ const Store: React.FC = () => {
   const [activeNav, setActiveNav] = useState<string>("category");
   const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
   const [showCategoryEditor, setShowCategoryEditor] = useState<boolean>(false);
+  const [search, setSearch] = useState("");
 
   const activeCategory = categories.find((cat) => cat.key === activeNav);
+
+  const searchResults = search.trim()
+    ? categories
+        .flatMap((cat) =>
+          cat.products.map((product) => ({
+            ...product,
+            categoryLabel: cat.label,
+          }))
+        )
+        .filter(
+          (product) =>
+            product.name.includes(search) ||
+            product.price.toString().includes(search)
+        )
+    : [];
+
+  const SearchContent = (
+    <div>
+      <h2 className="text-xl font-bold mb-4 text-gray-800">
+        搜尋結果：{search}
+      </h2>
+      {searchResults.length === 0 ? (
+        <p className="text-gray-500">沒有符合的商品</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {searchResults.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white p-4 rounded shadow relative"
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover mb-4 rounded"
+              />
+              <div className="mb-2 text-sm text-gray-500">
+                分類：{product.categoryLabel}
+              </div>
+              <div className="text-lg font-semibold">{product.name}</div>
+              <div className="text-gray-800 font-semibold">
+                ${product.price}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   const addNavItem = () => {
     const label = prompt("新分類名稱:");
@@ -201,7 +259,7 @@ const Store: React.FC = () => {
             <h2 className="text-2xl font-semibold">{category.label}</h2>
             <div className="flex space-x-2">
               <button
-                onClick={() => setShowCategoryEditor(!showCategoryEditor)}
+                onClick={() => setShowImageEditor(!showImageEditor)}
                 className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
                 {showImageEditor ? "關閉編輯" : "開啟編輯"}
@@ -283,7 +341,7 @@ const Store: React.FC = () => {
                           type="text"
                           value={product.image}
                           onChange={(e) =>
-                            updateProduct(product.id, "image", e.target.value)
+                            updateProduct(product.id, "name", e.target.value)
                           }
                           className="w-full px-2 py-1 border rounded"
                         />
@@ -316,9 +374,11 @@ const Store: React.FC = () => {
                     </div>
 
                     <div className="flex items-center justify-end space-x-2 pt-2">
-                      <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
-                        保存
-                      </button>
+                      {showImageEditor && (
+                        <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+                          保存
+                        </button>
+                      )}
                       <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
                         詳情
                       </button>
@@ -359,6 +419,16 @@ const Store: React.FC = () => {
           </button>
         </div>
 
+        <div className="p-4 border-b">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="搜尋商品名稱或是價格"
+            className="w-full px-3 py-2 border rounded"
+          />
+        </div>
+
         <nav className="p-4 flex-1">
           <h2 className="text-gray-500 uppercase tracking-wider mb-3 text-sm">
             導航分類
@@ -382,7 +452,12 @@ const Store: React.FC = () => {
         </nav>
       </aside>
 
-      <main className="flex-1 p-8 overflow-auto">{ActiveContent}</main>
+      <main className="flex-1 p-8 overflow-auto">
+        <div className="mb-6">
+          <Carousel sources={carouselSources} controls={false} />
+        </div>
+        {search.trim() ? SearchContent : ActiveContent}
+      </main>
     </div>
   );
 };

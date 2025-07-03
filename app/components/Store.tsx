@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "./Carousel";
-
+import { useCart } from "./CartContext";
 export type NavItem = { label: string; key: string };
 
 const carouselSources = [
@@ -11,7 +11,7 @@ const carouselSources = [
   "CarouselTest_1.mp4",
 ];
 
-type Product = {
+export type Product = {
   id: number;
   name: string;
   image: string;
@@ -55,6 +55,8 @@ const initialCategories: Category[] = [
 ];
 
 const Store: React.FC = () => {
+  const { addToCart, items } = useCart();
+  const [showCartModal, setShowCartModal] = useState(false);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [activeNav, setActiveNav] = useState<string>("category");
   const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
@@ -320,11 +322,7 @@ const Store: React.FC = () => {
                         type="text"
                         value={product.image}
                         onChange={(e) =>
-                          updateProduct(
-                            product.id,
-                            "image",
-                            e.target.validationMessage
-                          )
+                          updateProduct(product.id, "image", e.target.value)
                         }
                         className="w-full px-2 py-1 border rounded text-sm"
                       />
@@ -339,7 +337,7 @@ const Store: React.FC = () => {
                       {showImageEditor ? (
                         <input
                           type="text"
-                          value={product.image}
+                          value={product.name}
                           onChange={(e) =>
                             updateProduct(product.id, "name", e.target.value)
                           }
@@ -382,8 +380,11 @@ const Store: React.FC = () => {
                       <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
                         詳情
                       </button>
-                      <button className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700">
-                        訂購
+                      <button
+                        className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700"
+                        onClick={() => addToCart(product)}
+                      >
+                        加入購物車
                       </button>
                     </div>
                   </div>
@@ -409,14 +410,31 @@ const Store: React.FC = () => {
     <div className="flex min-h-screen bg-gray-100">
       <aside className="w-64 bg-white border-r flex flex-col">
         <div className="p-4 border-b">
-          <h1 className="text-xl font-bold mb-2">商店管理</h1>
+          <h1 className="text-xl font-bold mb-2">商店</h1>
+          {/* <span className="text-sm text-gray-600">
+            購物車數量：{items.reduce((sum, i) => sum + i.quantity, 0)}
+          </span> */}
           <button
-            onClick={addNavItem}
-            className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700"
-            title="新增分類"
+            onClick={() => setShowCartModal(true)}
+            className="ml-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
-            + 新增分類
+            購物車
           </button>
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="ml-2 px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700"
+          >
+            返回首頁
+          </button>
+          {showImageEditor && (
+            <button
+              onClick={addNavItem}
+              className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              title="新增分類"
+            >
+              + 新增分類
+            </button>
+          )}
         </div>
 
         <div className="p-4 border-b">
@@ -451,6 +469,42 @@ const Store: React.FC = () => {
           </ul>
         </nav>
       </aside>
+
+      {showCartModal && (
+        <div className="fixed inset-0 bg-gray-300 bg-opacity-10 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-66 w-full mx-w-md relative">
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-500"
+              onClick={() => setShowCartModal(false)}
+            >
+              X
+            </button>
+            <h2 className="text-xl font-bold mb-4">購物車內容</h2>
+            {items.length === 0 ? (
+              <p className="text-gray-500">購物車沒有商品</p>
+            ) : (
+              <ul className="divide-y">
+                {items.map((item) => (
+                  <li
+                    key={item.id}
+                    className="py-2 flex justify-between items-center"
+                  >
+                    <div>
+                      <div className="font-semibold">{item.name}</div>
+                      <div className="text-sm text-gray-500">
+                        數量：{item.quantity} 單價：${item.price}
+                      </div>
+                    </div>
+                    <div className="text-right font-bold">
+                      ${item.price * item.quantity}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
 
       <main className="flex-1 p-8 overflow-auto">
         <div className="mb-6">

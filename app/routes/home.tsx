@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import NavBar from "../components/Navbar";
 import Carousel from "~/components/Carousel";
 import IndexIntro from "~/components/IndexIntro";
+import Store from "~/components/Store";
+import { CartProvider } from "~/components/CartContext";
 export default function Home() {
   return (
     <div>
@@ -15,6 +17,7 @@ export default function Home() {
         ]}
         controls={false}
       />
+      
       <IndexIntro />
     </div>
   );

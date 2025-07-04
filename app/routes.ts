@@ -4,4 +4,5 @@ export default [
   index("routes/Home.tsx"),
   route("Navbar", "components/Navbar.tsx"),
   route("Store", "components/Store.tsx"),
+  route("InventoryChart", "components/InventoryChart.tsx"),
 ] satisfies RouteConfig;

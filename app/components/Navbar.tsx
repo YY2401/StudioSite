@@ -12,7 +12,7 @@ const menuItem: MenuItem[] = [
   { label: "主要服務內容", link: "" },
   {
     label: "遊戲",
-    link: "/games",
+    link: "/",
     subMenu: [
       { label: "遊戲列表", link: "" },
       { label: "最新活動", link: "" },
@@ -20,7 +20,7 @@ const menuItem: MenuItem[] = [
   },
   {
     label: "美術",
-    link: "/art",
+    link: "/",
     subMenu: [
       { label: "插畫", link: "" },
       { label: "動畫", link: "" },
@@ -28,7 +28,7 @@ const menuItem: MenuItem[] = [
   },
   {
     label: "平台",
-    link: "/platform",
+    link: "/",
     subMenu: [
       { label: "下載中心", link: "" },
       { label: "教學文檔", link: "" },

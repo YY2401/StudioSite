@@ -17,13 +17,13 @@ const Carousel: React.FC<CarouselProps> = ({ sources, controls = true }) => {
 
   return (
     <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      modules={[Pagination, A11y]}
       onSwiper={(swiper) => (swiperRef.current = swiper)}
       spaceBetween={30}
       slidesPerView={1}
-      navigation
+      // navigation
       pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
+      // scrollbar={{ draggable: true }}
       loop
       className="w-full h-100"
     >

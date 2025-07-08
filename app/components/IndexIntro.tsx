@@ -26,8 +26,14 @@ const categoryData: CategoryData[] = [
       {
         id: "home-intro",
         title: "歡迎來到我們的網站",
-        content: "這是我們的首頁介紹，提供最新的資訊和服務。",
+        content: "這是我們的介紹，提供最新的資訊和服務。",
         sources: ["/AboutUsSample.jpg"],
+      },
+      {
+        id: "home-hope",
+        title: "關於我們的願景",
+        content: "",
+        sources: ["/AboutUsSample_1.jpg"],
       },
     ],
   },

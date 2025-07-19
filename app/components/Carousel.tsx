@@ -25,7 +25,7 @@ const Carousel: React.FC<CarouselProps> = ({ sources, controls = true }) => {
       pagination={{ clickable: true }}
       // scrollbar={{ draggable: true }}
       loop
-      className="w-full h-100"
+      className="w-full h-200"
     >
       {sources.map((src, idx) => {
         const isVideo = /\.(mp4|webm|ogg)$/i.test(src);

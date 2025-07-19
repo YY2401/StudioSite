@@ -10,14 +10,14 @@ export default function Home() {
       <NavBar />
       <Carousel
         sources={[
-          "/CarouselTest_1.mp4",
-          "/CarouselTest_2.mp4",
-          "/CarouselTest_3.mp4",
-          "/CarouselTest_4.mp4",
+          "/Product_1.mp4",
+          "/Product_2.mp4",
+          "/Product_3.mp4",
+          "/Product_4.mp4",
         ]}
         controls={false}
       />
-      
+
       <IndexIntro />
     </div>
   );

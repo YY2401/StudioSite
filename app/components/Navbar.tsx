@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./ui/logoSample.jpg";
+import logo from "./ui/react.png";
 type MenuItem = {
   label: string;
   link: string;
@@ -11,28 +11,12 @@ const menuItem: MenuItem[] = [
   { label: "最新動態", link: "" },
   { label: "主要服務內容", link: "" },
   {
-    label: "遊戲",
-    link: "/",
-    subMenu: [
-      { label: "遊戲列表", link: "" },
-      { label: "最新活動", link: "" },
-    ],
-  },
-  {
-    label: "美術",
-    link: "/",
-    subMenu: [
-      { label: "插畫", link: "" },
-      { label: "動畫", link: "" },
-    ],
-  },
-  {
     label: "平台",
     link: "/",
-    subMenu: [
-      { label: "下載中心", link: "" },
-      { label: "教學文檔", link: "" },
-    ],
+    // subMenu: [
+    //   { label: "下載中心", link: "" },
+    //   { label: "教學文檔", link: "" },
+    // ],
   },
   { label: "商店", link: "/Store" },
   { label: "聯絡", link: "" },

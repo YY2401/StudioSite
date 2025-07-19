@@ -41,11 +41,11 @@ const CartPage: React.FC = () => {
           <div className="flex justify-between mt-6">
             <button
               onClick={() => navigate(-1)}
-              className="px-4 py-2 border rounded hover:bg-gray-100"
+              className="px-4 py-2 border rounded hover:bg-gray-100 cursor-pointer"
             >
               繼續購物
             </button>
-            <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer">
               前往結帳
             </button>
           </div>

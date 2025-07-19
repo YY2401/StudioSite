@@ -26,12 +26,13 @@ const categoryData: CategoryData[] = [
       {
         id: "home-intro",
         title: "歡迎來到我們的網站",
-        content: "這是我們的介紹，提供最新的資訊和服務。",
+        content: "",
         sources: ["/AboutUsSample.jpg"],
       },
       {
         id: "home-hope",
-        title: "關於我們的願景",
+        title:
+          "是否覺得腦袋中有很多點子希望被人看見，但又不知道怎麼能夠落實？請讓我們來協助！",
         content: "",
         sources: ["/AboutUsSample_1.jpg"],
       },
@@ -39,37 +40,33 @@ const categoryData: CategoryData[] = [
   },
   {
     id: "games",
-    title: "遊戲",
+    title: "軟體",
     items: [
       {
         id: "game-intro",
-        title: "最新遊戲介紹",
-        content: "這裡是我們最新遊戲的介紹，包含遊戲特色和玩法。",
+        title: "服務內容介紹",
+        content:
+          "我們致力於為每一位客戶的點子落實，並推動於各個平台上，使其能讓更多人看見。",
         sources: ["/GameSample_3.png"],
       },
       {
         id: "game-events",
-        title: "遊戲活動",
-        content: "參加我們的遊戲活動，獲得豐富獎勵！",
+        title: "當前活動",
+        content: "參加我們的推廣活動，獲得更多資訊！",
         sources: ["/GameSample_2.png"],
       },
     ],
   },
   {
     id: "esports",
-    title: "電子競技",
+    title: "公司願景",
     items: [
       {
         id: "esports-intro",
-        title: "電子競技介紹",
-        content: "了解我們的電子競技團隊和比賽資訊。",
-        sources: ["/GameSample_2.png"],
-      },
-      {
-        id: "esports-events",
-        title: "電子競技活動",
-        content: "參加我們的電子競技活動，挑戰自我！",
-        sources: ["/GameSample_4.png"],
+        title: "服務介紹",
+        content:
+          "我們努力將所有客戶的期許做到完善，透過開發產品將每一位客戶的點子落實，也透過網頁開發系統呈現所需的功能為實務流程帶來加速，產生更多收益。",
+        sources: ["/DevSampleImg.png"],
       },
     ],
   },

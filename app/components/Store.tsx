@@ -27,13 +27,8 @@ type Category = {
 
 const initialCategories: Category[] = [
   {
-    key: "Type1",
-    label: "Type1",
-    products: [],
-  },
-  {
-    key: "Type2",
-    label: "Type2",
+    key: "商品分類一",
+    label: "商品分類一",
     products: Array.from({ length: 6 }).map((_, index) => ({
       id: index + 1,
       name: `Product ${index + 1}`,
@@ -43,13 +38,18 @@ const initialCategories: Category[] = [
     })),
   },
   {
-    key: "Type3",
-    label: "Type3",
+    key: "商品分類二",
+    label: "商品分類二",
     products: [],
   },
   {
-    key: "Type4",
-    label: "Type4",
+    key: "商品分類三",
+    label: "商品分類三",
+    products: [],
+  },
+  {
+    key: "商品分類四",
+    label: "商品分類四",
     products: [],
   },
 ];
@@ -220,7 +220,7 @@ const Store: React.FC = () => {
         <h3 className="text-lg font-semibold">分類管理</h3>
         <button
           onClick={() => setShowCategoryEditor(!showCategoryEditor)}
-          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
         >
           {showCategoryEditor ? "收起" : "展開"}
         </button>
@@ -239,7 +239,7 @@ const Store: React.FC = () => {
                 </span>
                 <button
                   onClick={() => deleteNavItem(cat.key)}
-                  className="px-4 py-2 mt--2 bg-green-600 text-white rounded hover:bg-green-700"
+                  className="px-4 py-2 mt--2 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer"
                 >
                   +新增分類
                 </button>
@@ -262,13 +262,13 @@ const Store: React.FC = () => {
             <div className="flex space-x-2">
               <button
                 onClick={() => setShowImageEditor(!showImageEditor)}
-                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
               >
                 {showImageEditor ? "關閉編輯" : "開啟編輯"}
               </button>
               <button
                 onClick={addProductToCategory}
-                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer"
               >
                 + 新增商品
               </button>
@@ -282,7 +282,7 @@ const Store: React.FC = () => {
               <p>此分類暫無商品</p>
               <button
                 onClick={addProductToCategory}
-                className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer"
               >
                 新增第一個商品
               </button>
@@ -297,7 +297,7 @@ const Store: React.FC = () => {
                   {showImageEditor && (
                     <button
                       onClick={() => deleteProduct(product.id)}
-                      className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs hover:bg-red-600"
+                      className="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs hover:bg-red-600 cursor-pointer"
                       title="刪除商品"
                     >
                       X
@@ -373,15 +373,15 @@ const Store: React.FC = () => {
 
                     <div className="flex items-center justify-end space-x-2 pt-2">
                       {showImageEditor && (
-                        <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">
+                        <button className="px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-700 cursor-pointer">
                           保存
                         </button>
                       )}
-                      <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100">
+                      <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
                         詳情
                       </button>
                       <button
-                        className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700"
+                        className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700 cursor-pointer"
                         onClick={() => addToCart(product)}
                       >
                         加入購物車
@@ -404,7 +404,7 @@ const Store: React.FC = () => {
     }
   });
 
-  const ActiveContent = PageMap[activeNav] || <div>未設定的頁面</div>;
+  const ActiveContent = PageMap[activeNav] || <div></div>;
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -416,20 +416,20 @@ const Store: React.FC = () => {
           </span> */}
           <button
             onClick={() => setShowCartModal(true)}
-            className="ml-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="ml-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
           >
             購物車
           </button>
           <button
             onClick={() => (window.location.href = "/")}
-            className="ml-2 px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700"
+            className="ml-2 px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 cursor-pointer"
           >
             返回首頁
           </button>
           {showImageEditor && (
             <button
               onClick={addNavItem}
-              className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 cursor-pointer"
               title="新增分類"
             >
               + 新增分類
@@ -456,7 +456,7 @@ const Store: React.FC = () => {
               <li key={category.key}>
                 <button
                   onClick={() => setActiveNav(category.key)}
-                  className={`w-full text-left px-3 py-2 rounded transition-colors flex items-center justify-between
+                  className={`w-full text-left px-3 py-2 rounded transition-colors flex items-center justify-between cursor-pointer
                   ${activeNav === category.key ? "bg-blue-100 text-blue-800 font-semibold" : "hover:bg-gray-100"}`}
                 >
                   <span>{category.label}</span>
@@ -474,7 +474,7 @@ const Store: React.FC = () => {
         <div className="fixed inset-0 bg-gray-300 bg-opacity-10 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-66 w-full mx-w-md relative">
             <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-500"
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-500 cursor-pointer"
               onClick={() => setShowCartModal(false)}
             >
               X

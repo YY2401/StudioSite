@@ -8,10 +8,10 @@ export default function Home() {
       <NavBar />
       <Carousel
         sources={[
-          "/Product_1.mp4",
-          "/Product_2.mp4",
-          "/Product_3.mp4",
-          "/Product_4.mp4",
+          "/ProductSample_1.jpg",
+          "/ProductSample_2.jpg",
+          "/ProductSample_3.jpg",
+          "/ProductSample_4.jpg",
         ]}
         controls={false}
       />

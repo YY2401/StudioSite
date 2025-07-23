@@ -32,7 +32,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
               <button
                 onClick={() => onSelect?.(item.id)}
                 className={`
-                  w-full flex items-center justify-between py-3
+                  w-full flex items-center justify-between py-3 cursor-pointer
                   ${
                     isActive
                       ? "text-red-600 font-medium"

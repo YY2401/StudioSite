@@ -58,7 +58,8 @@ const Store: React.FC = () => {
   const { addToCart, items } = useCart();
   const [showCartModal, setShowCartModal] = useState(false);
   const [categories, setCategories] = useState<Category[]>(initialCategories);
-  const [activeNav, setActiveNav] = useState<string>("category");
+  const firstkey = initialCategories.length > 0 ? initialCategories[0].key : "";
+  const [activeNav, setActiveNav] = useState<string>(initialCategories[0].key);
   const [showImageEditor, setShowImageEditor] = useState<boolean>(false);
   const [showCategoryEditor, setShowCategoryEditor] = useState<boolean>(false);
   const [search, setSearch] = useState("");
@@ -377,15 +378,21 @@ const Store: React.FC = () => {
                           保存
                         </button>
                       )}
-                      <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
-                        詳情
-                      </button>
-                      <button
-                        className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700 cursor-pointer"
-                        onClick={() => addToCart(product)}
-                      >
-                        加入購物車
-                      </button>
+
+                      {!showImageEditor && (
+                        <button className="px-3 py-1 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-100 cursor-pointer">
+                          詳情
+                        </button>
+                      )}
+
+                      {!showImageEditor && (
+                        <button
+                          className="px-3 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700 cursor-pointer"
+                          onClick={() => addToCart(product)}
+                        >
+                          加入購物車
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
